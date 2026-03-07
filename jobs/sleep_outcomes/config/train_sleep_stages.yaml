@@ -1,0 +1,74 @@
+
+run_config:
+  model_type: "jepa"
+  wandb_project: ""
+  model_run: "1"
+  name: ""
+  random_state: 126
+  precision: "bf16-mixed"
+  loss_fxn: "CrossEntropy"
+  do_train: true
+  remove_channel_idxs: []
+  test_checkpoint_path: null
+paths:
+  encoder_dir: ""
+  models_dir: ""
+  data_dir: ""
+  pretrained_encoder_path: ""
+  dataset_filename: sleep_stages__SHHS1_SHHS2_MROS1_WSC__APPLES_MROS2_MESA
+
+dataset:
+  frequency: 128
+  patch_seconds: 3
+  overlap: 0.
+  trim_wake_epochs: false
+  max_seq_len_sec: 43200
+  min_seq_len_sec: 21600
+  return_hypnogram_every_sec: 30
+  hypnogram_frequency: 1
+  hypnogram_padding_mask: -100
+  include_partial_samples: true
+  normalize_signals: true
+  hypnogram_required_stages: [0, 2, 4]
+  hypnogram_constant_tolerance: 1.
+  constant_nan_tolerance: 0.99
+
+lp_head:
+  c_in: 7
+  hidden_size: 768
+  n_classes: 5
+  module: "GRU"
+  rnn_dropout: 0.1
+  num_rnn_layers: 2
+  pool: "average"
+  predict_every_n_patches: 10
+  bidirectional: true
+  affine: true
+  pre_norm: false
+  mlp_final_head: true
+  linear_dropout: 0.
+
+training:
+  batch_size: 10
+  epochs: 25
+  n_gpus: 1
+  num_workers: 16
+  accumulate_grad_batches: 1
+  val_check_interval: 0.5
+  gradient_clip_val: 1
+  use_gradient_clipping: true
+
+optimizer:
+  learning_rate: 0.00001
+  weight_decay: 0.0001
+  use_weight_decay_scheduler: false
+  final_weight_decay: 0.1
+  optimizer_type: "AdamW"
+
+scheduler:
+  scheduler_type: "OneCycle"
+  max_lr: 0.001
+  div_factor: 25
+  final_div_factor: 10000
+  pct_start: 0.3
+  anneal_strategy: "cos"

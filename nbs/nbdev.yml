@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "sleepjepa"
+  site-url: "https://benmfox.github.io/sleepjepa"
+  description: "SleepJEPA: Learning the latent world of sleep"
+  repo-branch: main
+  repo-url: "https://github.com/benmfox/sleepjepa"

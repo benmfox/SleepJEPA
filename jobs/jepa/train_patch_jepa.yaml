@@ -1,0 +1,108 @@
+
+run_config:
+  model_type: 'JEPA'
+  wandb_project: "HSP JEPA Self Supervised Training"
+  model_run: "1"
+  name: "JEPA_the_final_one_n_0004"
+  random_state: 126
+  precision: "bf16-mixed"
+  test_n_samples: 0
+  checkpoint_start_train_path: null
+
+paths:
+  models_dir: "models_hsp"
+  data_dir: ""
+  train_ds_file_path: "97_percent_12_hrs_AIMAHI_HSP_APPLES_MNC_WSC_JEPA_pretrain_data_train_zarrs_nested_tensors.csv.gz"
+  val_ds_file_path: "3_percent_hypnogram_12_hrs_AIMAHI_HSP_APPLES_MNC_WSC_JEPA_pretrain_data_val_zarrs_nested_tensors.csv.gz"
+
+dataset:
+  nested: true
+  frequency: 128
+  patch_seconds: 3
+  overlap: 0.
+  seq_len_sec: 43200
+  sample_stride_sec: 43200
+  max_seq_len_sec: 43200
+  min_seq_len_sec: 21600
+  trim_wake_epochs: false
+  return_hypnogram_every_sec: 3
+  hypnogram_frequency: 1
+  hypnogram_padding_mask: -100
+  include_partial_samples: true
+  start_offset_sec: 0
+  use_transforms: true
+  normalize_signals: true
+  constant_nan_tolerance: 0.5
+
+encoder:
+  d_model: 768
+  nhead: 8
+  num_layers: 8
+  pe_type: "rotary"
+  mlp_ratio: 4.0
+  use_tst_block: true
+  shared_embedding: false
+  qkv_bias: true
+  qk_scale: null
+  drop_rate: 0.1
+  attn_drop_rate: 0.
+  jepa: true
+  tokenizer_type: "simple"
+  tokenizer_kwargs:
+    depth: 1
+    bottleneck_channels: 112
+    residual: true
+    kernel_size: 40
+    bottleneck: true
+
+predictor:
+  predictor_embed_dim: 384
+  nhead: 8
+  num_layers: 4
+  use_tst_block: true
+  pe_type: "rotary"
+  mlp_ratio: 4.0
+  qkv_bias: true
+  qk_scale: null
+  drop_rate: 0.1
+  attn_drop_rate: 0.
+  c_in_mask_tokens: 7
+  shuffle: false
+
+training:
+  n_gpus: 4
+  num_nodes: 3
+  batch_size: 2
+  epochs: 100
+  num_workers: 12
+  accumulate_grad_batches: 1
+  huber_delta: 1
+  target_mask_range: [0.2, 0.8]
+  context_mask_range: [1.0, 1.0]
+  mask_block_range: [1, 1]
+  ema_decay: 0.998
+  val_check_interval: 1.0
+  check_val_every_n_epoch: 1
+  use_gradient_clipping: true
+  gradient_clip_val: 1
+  gradient_clip_algorithm: "norm"
+  use_lr_finder: false
+  loss_fxn: "mse"
+  linear_probe: true
+  
+optimizer:
+  learning_rate: 0.00001
+  weight_decay: 0.04
+  use_weight_decay_scheduler: true
+  final_weight_decay: 0.4
+  optimizer_type: "adamw"
+
+scheduler:
+  scheduler_type: "onecycle"
+  max_lr: 0.0004
+  div_factor: 25
+  final_div_factor: 100
+  pct_start: 0.20
+  anneal_strategy: "cos"
+  cycle_momentum: false
+

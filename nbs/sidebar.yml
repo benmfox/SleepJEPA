@@ -1,0 +1,17 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_slumber.ipynb
+      - 01_signal.ipynb
+      - 02_utils.ipynb
+      - 03_train.ipynb
+      - 04_loss.ipynb
+      - 05_data_preprocessing.ipynb
+      - 06_augmentations.ipynb
+      - 07_layers.ipynb
+      - 08_heads.ipynb
+      - 09_jepa.ipynb
+      - 10_survival.ipynb
+      - 11_nested.ipynb
+      - 12_tokenizers.ipynb

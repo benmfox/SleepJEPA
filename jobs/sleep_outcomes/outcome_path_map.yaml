@@ -1,0 +1,117 @@
+cvd_death_label:
+  pretty_name: "Cardiovascular Disease Death"
+  shhs_file_path: "sleep_outcome_data/shhs1_cvd_death_outcomes_cox_ph.csv"
+  mros_file_path: "sleep_outcome_data/mros_og_ids_cvd_death_outcomes_cox_ph.csv"
+  mesa_file_path: "sleep_outcome_data/mesa_cvd_death_outcomes_cox_ph.csv"
+  wsc_file_path: null
+  models_dir: ""
+  ext_test_sets: ["MESA"]
+  dataset_filename: "cvd_death_SHHS_MROS__MESA_WSC"
+  reps_demographics_best_path: ""
+  no_demos_best_path: ""
+  demographics_only_best_path: ""
+
+hypertension_label:
+  pretty_name: "Incident Hypertension"
+  shhs_file_path: "sleep_outcome_data/shhs_incidental_hypertension_labels.csv"
+  mros_file_path: "sleep_outcome_data/mros_incidental_hypertension_labels.csv"
+  wsc_file_path: null
+  models_dir: ""
+  ext_test_sets: []
+  dataset_filename: "incidental_hypertension_SHHS_MROS__WSC"
+  reps_demographics_best_path: ""
+  no_demos_best_path: ""
+  demographics_only_best_path: ""
+
+diabetes_label:
+  pretty_name: "Incident Diabetes"
+  shhs_file_path: "sleep_outcome_data/shhs_incidental_diabetes_labels.csv"
+  mros_file_path: "sleep_outcome_data/mros_incidental_diabetes_labels.csv"
+  wsc_file_path: "sleep_outcome_data/wsc_incidental_diabetes_labels.csv"
+  models_dir: ""
+  ext_test_sets: ["WSC"]
+  dataset_filename: "incidental_diabetes_SHHS_MROS__WSC"
+  reps_demographics_best_path: ""
+  no_demos_best_path: ""
+  demographics_only_best_path: ""
+
+osa_label:
+  pretty_name: "Incident OSA"
+  shhs_file_path: "sleep_outcome_data/shhs_incidental_osa_labels.csv"
+  mros_file_path: "sleep_outcome_data/mros_incidental_osa_labels.csv"
+  wsc_file_path: "sleep_outcome_data/wsc_incidental_osa_labels.csv"
+  models_dir: ""
+  ext_test_sets: ["WSC"]
+  dataset_filename: "incidental_osa_SHHS_MROS__WSC"
+  reps_demographics_best_path: ""
+  no_demos_best_path: ""
+  demographics_only_best_path: ""
+
+stroke_label:
+  pretty_name: "Stroke"
+  shhs_file_path: "sleep_outcome_data/shhs_incidental_stroke_labels.csv"
+  mros_file_path: "sleep_outcome_data/mros_incidental_stroke_labels.csv"
+  mesa_file_path: "sleep_outcome_data/mesa_incidental_stroke_labels.csv"
+  wsc_file_path: null
+  models_dir: ""
+  ext_test_sets: ["MESA"]
+  dataset_filename: "incidental_stroke_SHHS_MROS__MESA_WSC"
+  reps_demographics_best_path: ""
+  no_demos_best_path: ""
+  demographics_only_best_path: ""
+
+mi_label:
+  pretty_name: "Myocardial Infarction"
+  shhs_file_path: "sleep_outcome_data/shhs_incidental_mi_labels.csv"
+  mros_file_path: "sleep_outcome_data/mros_incidental_mi_labels.csv"
+  mesa_file_path: "sleep_outcome_data/mesa_incidental_mi_labels.csv"
+  wsc_file_path: null
+  models_dir: ""
+  ext_test_sets: ["MESA"]
+  dataset_filename: "incidental_mi_SHHS_MROS__MESA_WSC"
+  reps_demographics_best_path: ""
+  no_demos_best_path: ""
+  demographics_only_best_path: ""
+
+angina_label:
+  pretty_name: "Angina"
+  shhs_file_path: "sleep_outcome_data/shhs_incidental_angina_labels.csv"
+  mros_file_path: "sleep_outcome_data/mros_incidental_angina_labels.csv"
+  models_dir: ""
+  ext_test_sets: []
+  dataset_filename: "incidental_angina_SHHS_MROS"
+  reps_demographics_best_path: ""
+  no_demos_best_path: ""
+  demographics_only_best_path: ""
+
+chf_label:
+  pretty_name: "Congestive Heart Failure"
+  shhs_file_path: "sleep_outcome_data/shhs_incidental_chf_labels.csv"
+  mros_file_path: "sleep_outcome_data/mros_incidental_chf_labels.csv"
+  models_dir: ""
+  ext_test_sets: []
+  dataset_filename: "incidental_chf_SHHS_MROS"
+  reps_demographics_best_path: ""
+  no_demos_best_path: ""
+  demographics_only_best_path: ""
+
+chd_death_label:
+  pretty_name: "Coronary Heart Disease Death"
+  shhs_file_path: "sleep_outcome_data/shhs_incidental_chd_death_labels.csv"
+  mesa_file_path: "sleep_outcome_data/mesa_incidental_chd_death_labels.csv"
+  models_dir: ""
+  ext_test_sets: ['MESA']
+  dataset_filename: "incidental_chd_death_SHHS__MESA"
+  reps_demographics_best_path: ""
+  no_demos_best_path: ""
+  demographics_only_best_path: ""
+
+cognitive_decline_label:
+  pretty_name: "Incident Cognitive Decline"
+  mros_file_path: "sleep_outcome_data/mros_cognitive_decline_labels.csv"
+  models_dir: ""
+  ext_test_sets: []
+  dataset_filename: "cognitive_decline_MROS"
+  reps_demographics_best_path: ""
+  no_demos_best_path: ""
+  demographics_only_best_path: ""

@@ -1,0 +1,68 @@
+
+run_config:
+  model_type: "jepa"
+  wandb_project: ""
+  model_run: "1"
+  name: ""
+  random_state: 126
+  precision: "bf16-mixed"
+  do_train: true
+  test_checkpoint_path: ""
+
+paths:
+  encoder_dir: ""
+  models_dir: ""
+  pretrained_encoder_path: ""
+  wsc_file_path: "sleep_outcome_data/wsc_mslt_outcomes_no_night_shift.csv"
+  mnc_file_path: "sleep_outcome_data/mnc_narcolepsy_outcomes.csv"
+  dataset_filename: "obj_sleepiness_WSC_no_night_shift__lt8"
+
+dataset:
+  nested: true
+  frequency: 128
+  patch_seconds: 3
+  overlap: 0.
+  max_seq_len_sec: 43200
+  min_seq_len_sec: 21600
+  include_partial_samples: true
+  outcome_cols: ["obj_eds_label_lt8"]
+  normalize_signals: true
+  constant_nan_tolerance: 1.
+
+lp_head:
+  mlp_ratio: 4.0
+  depth: 1
+  init_std: 0.02
+  qkv_bias: true
+  num_classes: 1
+  complete_block: true
+  per_channel: false
+
+training:
+  batch_size: 15
+  epochs: 25
+  n_gpus: 1
+  num_workers: 14
+  accumulate_grad_batches: 1
+  val_check_interval: 0.5
+  gradient_clip_val: 1
+  use_gradient_clipping: true
+  fine_tune: false
+  use_lr_finder: false
+  use_transforms: false
+  use_class_weights: true
+  loss_func: null
+  
+optimizer:
+  learning_rate: 0.0006
+  weight_decay: 0.001
+  use_weight_decay_scheduler: false
+  final_weight_decay: 0.1
+  optimizer_type: "AdamW"
+
+
+scheduler:
+  scheduler_type: "cosineannealingwarmrestarts"
+  T_0: 5
+  T_mult: 2
+  eta_min: 0.000001
