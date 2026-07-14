@@ -1,0 +1,39 @@
+edf_directory_or_file_path: "/Users/benfox/Downloads/SHHS Examples/shhs1-200002/" # the path to the edf file or directory of edf files to perform inference on
+# use all caps for channel names!
+channels:
+  eeg: "EEG" # the EEG channel name in the EDF. The model was trained with C4-M1 and C3-M2 referenced EEG channels. However, 
+  left_eog: "EOG(L)" # the left EOG channel name in the EDF. The model was trained with M2 referenced left EOG channels.
+  chin_emg: "EMG" # the chin EMG channel name in the EDF. The model was trained with chin refenced (chin 2 or chin 3) EMG channels.
+  ecg: "ECG" # the ECG channel name in the EDF. The model was trained with augmented lead 2 ecg channels
+  spo2: "SaO2" # the SpO2 channel name in the EDF.
+  abdomen_rr: "ABDO RES" # the abdomen RR channel name in the EDF. 
+  thoracic_rr: "THOR RES" # the thoracic RR channel name in the EDF.
+eeg_reference_channel: null # the EEG reference channel name in the EDF. The model was trained with C4-M1 and C3-M2 referenced EEG channels. This will reference the channels, if they havent already been referenced. 
+left_eog_reference_channel: null # the left EOG reference channel name in the EDF. The model was trained with M2 referenced left EOG channels. This will reference the channels, if they havent already been referenced. 
+chin_emg_reference_channel: null # the chin EMG reference channel name in the EDF. The model was trained with chin refenced (chin 2 or chin 3) EMG channels. This will reference the channels, if they havent already been referenced. 
+ecg_reference_channel: null # the ECG reference channel name in the EDF. The model was trained with augmented lead 2 ecg channels. This will reference the channels, if they havent already been referenced. 
+frequency: 128
+min_sequence_length_sec: 21600 # dont change
+max_sequence_length_sec: 43200 # dont change
+
+# frequency filters
+frequency_filters:
+  eeg_channel: [0.3, 45]
+  left_eog_channel: [0.3, 45]
+  chin_emg_channel: [null, 10]
+  ecg_channel: [null, 0.3]
+  spo2_channel: [] # default
+  abdomen_rr_channel: [0.1, 15]
+  thoracic_rr_channel: [0.1, 15]
+
+batch_size: 6 # the batch size to use for inference
+pin_memory: False # whether to pin memory for the dataloader
+persistent_workers: False # whether to use persistent workers for the dataloader
+num_workers: 8 # the number of workers to use for the dataloader
+device: "cpu" # the device to use for inference. Only a single GPU or CPU is supported.
+autocast: false # whether to use autocast, only use on CUDA, not on CPU
+models_dir: "/Users/benfox/Downloads/" # the directory to use for the saved models
+encoder_model_name: "sleepjepa_encoder.ckpt" # the name of the encoder model (downloaded from hugging face)
+classifier_model_name: "sleepjepa_stage_classifier.ckpt" # the name of the classifier model (downloaded from hugging face)
+preds_output_path: "preds.pt" # the path to save the predictions in a torch tensor file, null to not save
+save_hypjson: true # whether to save the predictions to hypjson files

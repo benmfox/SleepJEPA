@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Time flies when you are doing physiological time series AI">
+<meta name="description" content="Learning the latent world of sleep!">
 
-<title>timeflies – sleepjepa</title>
+<title>SleepJEPA – sleepjepa</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -104,11 +104,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="timeflies – sleepjepa">
-<meta property="og:description" content="Time flies when you are doing physiological time series AI">
+<meta property="og:title" content="SleepJEPA – sleepjepa">
+<meta property="og:description" content="Learning the latent world of sleep!">
 <meta property="og:site_name" content="sleepjepa">
-<meta name="twitter:title" content="timeflies – sleepjepa">
-<meta name="twitter:description" content="Time flies when you are doing physiological time series AI">
+<meta name="twitter:title" content="SleepJEPA – sleepjepa">
+<meta name="twitter:description" content="Learning the latent world of sleep!">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -133,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">timeflies</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">SleepJEPA</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -148,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">timeflies</span></a>
+ <span class="menu-text">SleepJEPA</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -229,6 +229,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">Tokenizers</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./inference.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Inference</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -239,7 +245,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#install" id="toc-install" class="nav-link active" data-scroll-target="#install">Install</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#install" id="toc-install" class="nav-link" data-scroll-target="#install">Install</a></li>
+  <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference">Inference</a></li>
+  <li><a href="#repository-structure-and-usage" id="toc-repository-structure-and-usage" class="nav-link" data-scroll-target="#repository-structure-and-usage">Repository Structure and Usage</a>
+  <ul class="collapse">
+  <li><a href="#directory-structure" id="toc-directory-structure" class="nav-link" data-scroll-target="#directory-structure">Directory Structure:</a></li>
+  </ul></li>
+  <li><a href="#technical-details" id="toc-technical-details" class="nav-link" data-scroll-target="#technical-details">Technical Details</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/benmfox/sleepjepa/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -248,12 +261,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">timeflies</h1>
+<h1 class="title">SleepJEPA</h1>
 </div>
 
 <div>
   <div class="description">
-    Time flies when you are doing physiological time series AI
+    Learning the latent world of sleep!
   </div>
 </div>
 
@@ -271,9 +284,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>SleepJEPA is a Python package for at-home sleep study data to classify sleep stages, sleepiness, and estimate long-term disease risk. SleepJEPA was trained with the JEPA architecture, modified for signal data and sleep studies. The repository is built using nbdev, which means the package is developed in Jupyter notebooks.</p>
+<p>See the publication in tbd…</p>
+</section>
 <section id="install" class="level2">
 <h2 class="anchored" data-anchor-id="install">Install</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install sleepjepa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="inference" class="level2">
+<h2 class="anchored" data-anchor-id="inference">Inference</h2>
+<p>To perform inference on unseen data (using EDF file paths as input), use the <code>sleepjepa_sleep_stage_inference.py</code> and <code>sleepjepa_sleep_stage_inference_config.yaml</code> files.</p>
+<p>Please create an account on Hugging Face and request access to the models <a href="https://huggingface.co/benmfox/SleepJEPA">here</a>. You will also need to create a personal access token, with read access. <strong>Read</strong> more <a href="https://huggingface.co/docs/hub/en/security-tokens">here</a>.</p>
+<p>Following, download the encoder and sleep stage classifier models with:</p>
+<pre><code>from sleepjepa.inference import download_sleepjepa_models
+
+download_sleepjepa_models(models_dir='', token=YOUR_HF_TOKEN)</code></pre>
+<p>You will also be prompted to download the files when running the inference script, if they are not in <code>models_dir</code>.</p>
+<p>After the models are downloaded, update the <code>sleepjepa_sleep_stage_inference_config.yaml</code> file with a path to your edf or edf directory. You can pass both a single edf file or a directory of edfs. You can also use glob syntax if specifying edfs within single sub directories (e.g.&nbsp;/path/to/base/directory/**/).</p>
+<p>Unfortunately, due to differing naming conventions for signal channels, if you are passing multiple edfs, but they have different channel names, the dataloader will fail. It is recommended in this case to rewrite the edfs to a consistent channel name format, or perform inference on them one by one.</p>
+<p>If a specific channel is not available for a given edf or set of edfs, pass the keyword “null” or “dummy” to that channels name parameter in the yaml if you’d like to see how the model performs with that channel set as all zero.</p>
+<p>The model expects referenced EEG, Left EOG, EMG, and ECG channels. If your channels are unreferenced, you may pass the corresponding reference channels. The model was trained with the following referenced channels (priority was given to the ones listed first in the below list):</p>
+<pre><code>EEG: C4-M1 or C3-M2
+EMG: Chin1-Chin2 or Chin1-Chin3
+ECG: Augmented lead 2 (or ECG (LL) - ECG (RA))
+Left EOG: E1-M2</code></pre>
+<p>Check the <code>slumber.py</code> source code for NSRR specific channels (under the <code>SHHS_CHANNELS</code>, <code>MROS_CHANNELS</code>, <code>WSC_CHANNELS</code>, etc. variables) if the above is confusing. Additionally bandpass, lowpass, and highpass filters need to be specified. The defaults are listed in the yaml and shouldn’t be changed.</p>
+<p>For the <code>device</code> parameter, use “cpu” (slowest) or a GPU (e.g.&nbsp;“cuda:0”). MPS (“mps” for Mac OS X) is not supported due to the use of nested tensors.</p>
+<p>Prediction logits of shape [bs x 5 x L] are outputted, where L is the total number of 30 second sleep epochs in the entire length sleep study (if your study is 8 hours long, then L will be 8 * 3600 divided by 30). The first dimension indicates individual sleep stage logits where the 0 index is wake, 1 is N1, 2 is N2, 3 is N3, and 4 is REM. To retrieve probabilities, use torch’s softmax function on the 1st dimension of the tensor. Note that the model uses nested tensors.</p>
+<p>If using a CPU, it is recommended to predict each sample individually. This will happen automatically with the inference script by passing the <strong>dataset</strong> (not dataloader) to the <a href="https://benmfox.github.io/sleepjepa/inference.html#infer_on_edf_dataset"><code>infer_on_edf_dataset</code></a> function. Ensure <code>autocast</code> is set to False when using a CPU.</p>
+<p>If using CUDA, you can use a dataloader. On CUDA, autocast should be enabled and is an option in the inference function. If you are having issues, try inference on each item one by one by passing the <strong>dataset</strong> (not dataloader) to the <a href="https://benmfox.github.io/sleepjepa/inference.html#infer_on_edf_dataset"><code>infer_on_edf_dataset</code></a> function with <code>autocast</code> set to False.</p>
+<p>To finally run the predictions on a single edf file or directory of edf files, run the python script via:</p>
+<pre><code>python sleepjepa_sleep_stage_inference.py sleepjepa_sleep_stage_inference_config.yaml</code></pre>
+<p>Predictions will be output to a torch tensor file <code>.pt</code> at the location specified in the yaml.</p>
+<p>Additionally, you can pass the <code>save_hypjson</code> parameter in the yaml as <code>true</code>. This will perform softmax, max index selecting, and save the predictions as a HYPJSON file (with the same filename as the edf file, + ’_sleepjepa.HYPJSON’). You can also use the <a href="https://benmfox.github.io/sleepjepa/inference.html#write_pred_to_hypjson"><code>write_pred_to_hypjson</code></a> function for individual files. Sleep stages are mapped in this function to typical HYPJSON standards (for example, REM is mapped to the integer “5”).</p>
+</section>
+<section id="repository-structure-and-usage" class="level2">
+<h2 class="anchored" data-anchor-id="repository-structure-and-usage">Repository Structure and Usage</h2>
+<p>This is an <a href="https://nbdev.fast.ai/">nbdev</a> repository, which means the package is developed in Jupyter notebooks located in the <code>nbs/</code> directory. Any modifications or additions to the <code>sleepjepa</code> package should be made by editing these notebooks.</p>
+<p>To build the package, run <code>nbdev_prepare</code> in the terminal. This will generate the <code>sleepjepa</code> package in the <code>sleepjepa/</code> directory and all python modules, which can be imported and used in other Python projects.</p>
+<p>To add new functionality, create a new notebook or add to exisitng in the <code>nbs/</code> directory and follow the instructions in the <a href="https://nbdev.fast.ai/getting_started.html">nbdev documentation</a> to add the new functionality. Then, run <code>nbdev_prepare</code> to generate the <code>sleepjepa</code> package with the new functionality.</p>
+<section id="directory-structure" class="level3">
+<h3 class="anchored" data-anchor-id="directory-structure">Directory Structure:</h3>
+<ul>
+<li><code>nbs/</code>: Contains the source notebooks that generate the Python package</li>
+<li><code>jobs/</code>: Contains processing and training scripts
+<ul>
+<li><code>apples/</code>: Processing scripts for the apples dataset</li>
+<li><code>human_sleep_project/</code>: Processing scripts for the human sleep project dataset</li>
+<li><code>jepa/</code>: Training script for the JEPA sleep model</li>
+<li><code>mesa/</code>: Processing scripts for the mesa dataset</li>
+<li><code>mnc/</code>: Processing scripts for the mnc dataset</li>
+<li><code>mros/</code>: Processing scripts for the mros dataset</li>
+<li><code>shhs/</code>: Processing scripts for the shhs dataset</li>
+<li><code>wsc/</code>: Processing scripts for the wsc dataset</li>
+<li><code>sleep_outcomes/</code>:
+<ul>
+<li><code>config/</code>: Config files for training outcomes/models</li>
+<li><code>train_age.py</code>: Model training script for SleepJEPA representations to estimate chronological age prediction</li>
+<li><code>train_obj_sleepiness.py</code>: Model training script for SleepJEPA representations to estimate objective sleepiness and narcolepsy outcomes</li>
+<li><code>train_sleep_stages.py</code>: Model training script for SleepJEPA representations to classify sleep stages</li>
+<li><code>train_demographics_long_term_outcome.py</code>: Model training script to train demographics only model for long term disease risk estimation</li>
+<li><code>train_sleep_long_term_outcome.py</code>: Model training script to train SleepJEPA representations +/- demographicss for long term disease risk estimation</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="technical-details" class="level2">
+<h2 class="anchored" data-anchor-id="technical-details">Technical Details</h2>
+<ul>
+<li>We trained the foundational model on H100nvl GPUs using PyTorch Lightning.</li>
+<li>We monitored training using the <a href="https://wandb.ai/">Weights and Biases</a> platform.</li>
+</ul>
 
 
 </section>

@@ -1,0 +1,80 @@
+import yaml, glob, os, torch, sys
+
+from sleepjepa.inference import infer_on_edf_dataset, inference_nested_tensor_collate, EDFDataset, download_sleepjepa_models, write_pred_to_hypjson
+from torch.utils.data import DataLoader
+from pathlib import Path
+import getpass
+
+yaml_path = sys.argv[1]
+with open(yaml_path, 'r') as f:
+    yaml_data = yaml.safe_load(f)
+
+
+if __name__ == "__main__":
+
+    if os.path.exists(os.path.join(yaml_data['models_dir'], yaml_data['encoder_model_name'])) and os.path.exists(os.path.join(yaml_data['models_dir'], yaml_data['classifier_model_name'])):
+        print(f"Encoder and classifier models found in {yaml_data['models_dir']}")
+    else:
+        print(f"Encoder and classifier models not found in {yaml_data['models_dir']}")
+        print(f"Downloading encoder and classifier models to {yaml_data['models_dir']}...")
+        if not os.path.exists(yaml_data['models_dir']):
+            os.makedirs(yaml_data['models_dir'])
+        try:
+            download_sleepjepa_models(write_dir=yaml_data['models_dir'], token=getpass.getpass("Enter your Hugging Face token: "))
+        except Exception as e:
+            raise ValueError(f"Error downloading encoder and classifier models: {e}")
+
+    edf_directory_or_file_path = yaml_data['edf_directory_or_file_path']
+    assert os.path.exists(edf_directory_or_file_path), f"EDF directory or file path not found in {edf_directory_or_file_path}"
+    if Path(edf_directory_or_file_path).is_dir():
+        edf_file_paths = glob.glob(os.path.join(edf_directory_or_file_path, '*.edf')) + glob.glob(os.path.join(edf_directory_or_file_path, '*.EDF'))
+    elif Path(edf_directory_or_file_path).is_file():
+        assert Path(edf_directory_or_file_path).suffix.lower() in ['.edf', '.EDF'], f"The file {edf_directory_or_file_path} is not an EDF file"
+        edf_file_paths = [edf_directory_or_file_path]
+    else:
+        raise ValueError(f"EDF directory or file path not found in {edf_directory_or_file_path}")
+
+    assert len(edf_file_paths) > 0, "No EDF files found in {edf_directory_or_file_path}"
+    frequency_filters = list(yaml_data['frequency_filters'].values())
+    frequency_filters = dict(zip(yaml_data['channels'].values(), frequency_filters))
+    process_edf_kwargs = {'frequency_filters': frequency_filters,
+                          'frequency': yaml_data['frequency'],
+                          'min_sequence_length': yaml_data['min_sequence_length_sec'],
+                          'max_sequence_length': yaml_data['max_sequence_length_sec'],
+                          'spo2_channel_name': yaml_data['channels']['spo2']
+                          }
+
+    dataset = EDFDataset(edf_file_paths=edf_file_paths, 
+                        eeg_channel=yaml_data['channels']['eeg'], 
+                        left_eog_channel=yaml_data['channels']['left_eog'], 
+                        chin_emg_channel=yaml_data['channels']['chin_emg'],
+                        ecg_channel=yaml_data['channels']['ecg'], 
+                        spo2_channel=yaml_data['channels']['spo2'], 
+                        abdomen_rr_channel=yaml_data['channels']['abdomen_rr'], 
+                        thoracic_rr_channel=yaml_data['channels']['thoracic_rr'],
+                        eeg_reference_channel=yaml_data['eeg_reference_channel'],
+                        left_eog_reference_channel=yaml_data['left_eog_reference_channel'],
+                        chin_emg_reference_channel=yaml_data['chin_emg_reference_channel'],
+                        ecg_reference_channel=yaml_data['ecg_reference_channel'],
+                        **process_edf_kwargs
+                        )
+    data_loader = DataLoader(dataset, batch_size=yaml_data['batch_size'], shuffle=False, pin_memory=yaml_data['pin_memory'], persistent_workers=yaml_data['persistent_workers'], num_workers=yaml_data['num_workers'], collate_fn=inference_nested_tensor_collate)
+    preds = infer_on_edf_dataset(edf_dataloader=data_loader if yaml_data['device'] == 'cuda' else dataset, # use the dataset on cpu, and predict each item individually
+                                device=yaml_data['device'],
+                                models_dir=yaml_data['models_dir'],
+                                autocast=yaml_data['autocast'],
+                                encoder_model_name=yaml_data['encoder_model_name'],
+                                classifier_model_name=yaml_data['classifier_model_name']
+                                )
+    if yaml_data.get('save_hypjson', False):
+        for path, pred in zip(edf_file_paths, preds):
+            # write to hypjson file
+            try:
+                hyp_dir = Path(path).parent
+                hypjson_path = hyp_dir / (Path(path).stem + '_sleepjepa.HYPJSON')
+                write_pred_to_hypjson(pred, hypjson_path)
+            except Exception as e:
+                print(f"Error writing hypjson file for {path}: {e}")
+    if yaml_data.get('preds_output_path', None) is not None:
+        torch.save(preds, yaml_data['preds_output_path'])
+
