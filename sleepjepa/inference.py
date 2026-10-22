@@ -187,7 +187,7 @@ def process_edf(edf_file_path, # The edf file path to perform inference on
         signal = f.signals[c_idx].data
         channel_frequency = signal_headers[channels.index(channel_name)].get('sample_frequency', frequency)
         if reference_channels_dict and channel_name in reference_channels_dict and len(reference_channels_idxs) > 0:
-            reference_signal = f.signals[reference_channels_idxs[reference_channels.index(channel_name)]].data
+            reference_signal = f.signals[reference_channels_idxs[reference_channels.index(reference_channels_dict[channel_name])]].data
             signal = signal - reference_signal
         if len(signal) != required_length:
             signal = resample_waveform(signal, int(channel_frequency), int(frequency), is_spo2=channel_name == spo2_channel_name.upper())
@@ -478,4 +478,4 @@ def infer_on_edf_dataset(edf_dataloader, # the edf dataset to perform inference 
             else:
                 pred = ss_classifier(x) # [bs, n_classes, pred_len_seconds]
             preds.append(pred.cpu())
-    return torch.cat(preds)
+    return preds
